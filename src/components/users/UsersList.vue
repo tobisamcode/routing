@@ -1,4 +1,5 @@
 <template>
+  <button @click="buttonClicked()">Click Button</button>
   <ul>
     <user-item v-for="user in users" :key="user.id" :name="user.fullName" :role="user.role"></user-item>
   </ul>
@@ -12,6 +13,13 @@ export default {
     UserItem,
   },
   inject: ['users'],
+  methods: {
+    buttonClicked(){
+      //do.....
+      this.$router.push('/teams');
+      // this.$router.forward()
+    }
+  }
 };
 </script>
 
