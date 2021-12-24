@@ -1,5 +1,6 @@
 <template>
   <button @click="buttonClicked()">Click Button</button>
+  <button @click="saveChanges()">Save Changes</button>
   <ul>
     <user-item v-for="user in users" :key="user.id" :name="user.fullName" :role="user.role"></user-item>
   </ul>
@@ -13,18 +14,40 @@ export default {
     UserItem,
   },
   inject: ['users'],
+  data() {
+    return { 
+      changesSaved: false
+    };
+  },
   methods: {
     buttonClicked(){
       //do.....
       this.$router.push('/teams');
       // this.$router.forward()
+    },
+    saveChanges() {
+      this.changesSaved = true;
     }
   },
   beforeRouteEnter(to, from, next){
     console.log('UsersList Cmp beforeRouteEnter');
     console.log(to, from);
     next();
-  }
+  },
+  beforeRouteLeave(to, from, next){
+    console.log('UsersList Cmp beforeRouterLeave');
+    console.log(to, from);
+    
+    if (this.changesSaved === true){
+      next();
+    } else {
+      const userWantsToLeave = confirm('Are you sure? You got unsaved changes');
+      next(userWantsToLeave);
+    }
+  },
+  unmounted() {
+    console.log('unmounted');
+  },
 };
 </script>
 
