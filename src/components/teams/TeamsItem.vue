@@ -12,7 +12,7 @@ export default {
   computed: {
     teamMembersLink() {
       // return '/teams/' + this.id;
-      return { path: '/teams' + this.id  };
+      return { name:'team-members', params: {teamId: this.id} };
     }
   }
 };
