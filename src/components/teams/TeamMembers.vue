@@ -42,8 +42,9 @@ export default {
     }
   },
   created(){
-    // this.$route.pa th
-    this.loadTeamMembers(this.teamId)
+    // this.$route.path
+    this.loadTeamMembers(this.teamId);
+    console.log(this.$route.query)
   },
   watch:{
     teamId(newId) {
