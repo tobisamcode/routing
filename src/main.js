@@ -40,6 +40,7 @@ const router = createRouter({
         return { left: 0, top: 0 }
     }
 });
+
 router.beforeEach(function(to, from, next) {
     console.log('Global beforeEach')
     console.log(to, from);
@@ -50,6 +51,12 @@ router.beforeEach(function(to, from, next) {
     // }
     next();
 })
+
+router.afterEach(function(to, from) {
+    // sending analytics data
+    console.log('Global afterEach');
+    console.log(to, from);
+});
 
 const app = createApp(App)
 
